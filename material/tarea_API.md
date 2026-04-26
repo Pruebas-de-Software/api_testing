@@ -24,9 +24,7 @@ Diseñar, implementar, documentar (Swagger) y probar una API REST para la gesti�
 ---
 
 ## 3. Objetivos específicos
-
-El estudiante deberá:
-
+Se debe:
 - Diseñar una API REST basada en un dominio real (gestión de tareas)
 - Implementar endpoints con reglas de negocio claras
 - Documentar la API usando Swagger/OpenAPI
@@ -229,7 +227,7 @@ Debe exponerse en:
 
 # 8. Requerimientos de testing
 
-## 8.1 Tipos de prueba
+## 8.1 Tipos de prueba necesarios
 
 - Funcionales
 - Negativos
@@ -240,19 +238,7 @@ Debe exponerse en:
 
 ---
 
-## 8.2 Casos mínimos
-
-| Tipo | Cantidad |
-|------|--------:|
-| Positivos | 10 |
-| Negativos | 12 |
-| Borde | 6 |
-| Seguridad | 6 |
-| Automatizados | 10 |
-
----
-
-## 8.3 Validación Swagger vs API
+## 8.2 Validación Swagger vs API
 
 - Consistencia de schemas
 - Códigos HTTP correctos
@@ -262,7 +248,7 @@ Debe exponerse en:
 
 # 9. Automatización
 
-Herramientas sugeridas:
+Herramientas sugeridas 
 
 - Postman + Newman  
 - Pytest + requests  
@@ -293,29 +279,6 @@ Herramientas sugeridas:
 
 ---
 
-# 12. Rúbrica
-
-| Criterio | Peso |
-|---------|------|
-| Diseño de API | 15% |
-| Implementación | 20% |
-| Swagger | 15% |
-| Testing | 25% |
-| Seguridad | 10% |
-| Automatización | 10% |
-| Documentación | 5% |
-
----
-
-# 13. Extensiones opcionales
-
-- Roles
-- JWT
-- CI/CD
-- Docker
-
----
-
-# 14. Resultado esperado
+# 12. Resultado esperado
 
 El estudiante integra diseño, implementación, documentación y testing de APIs en un escenario realista.
