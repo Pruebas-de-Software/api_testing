@@ -1,0 +1,321 @@
+# Tarea INF331: Diseño, Implementación y Testing de una API de Gestión de Tareas con API Key y Swagger
+
+## 1. Contexto del problema
+
+Una empresa está desarrollando una plataforma interna para gestionar el trabajo de sus equipos. Actualmente, las tareas se administran de forma manual (planillas, correos, chats), lo que genera:
+
+- Falta de trazabilidad  
+- Errores en asignaciones  
+- Dificultad para conocer estados reales  
+- Problemas de coordinación  
+
+El objetivo es construir una API REST de gestión de tareas (Task Management API) que permita administrar tareas, usuarios y estados, incorporando:
+
+- Seguridad básica mediante API Key
+- Documentación formal mediante Swagger/OpenAPI
+- Estrategia completa de testing de API
+
+---
+
+## 2. Objetivo general
+
+Diseñar, implementar, documentar (Swagger) y probar una API REST para la gestión de tareas, incorporando validaciones, seguridad básica y automatización de pruebas.
+
+---
+
+## 3. Objetivos específicos
+
+El estudiante deberá:
+
+- Diseñar una API REST basada en un dominio real (gestión de tareas)
+- Implementar endpoints con reglas de negocio claras
+- Documentar la API usando Swagger/OpenAPI
+- Implementar autenticación mediante API Key
+- Diseñar pruebas funcionales, negativas y de seguridad
+- Automatizar pruebas de API
+- Validar la consistencia entre implementación y documentación
+
+---
+
+# 4. Dominio del problema: Gestión de Tareas
+
+## 4.1 Entidad principal: Task
+
+```json
+{
+  "id": 1,
+  "title": "Implementar endpoint de login",
+  "description": "Crear endpoint POST /login con validación",
+  "status": "pending",
+  "priority": "high",
+  "assignedTo": 10,
+  "dueDate": "2026-05-10",
+  "createdAt": "2026-04-26"
+}
+```
+
+---
+
+## 4.2 Reglas de negocio
+
+- `title` es obligatorio
+- `status` ∈ {pending, in_progress, done}
+- `priority` ∈ {low, medium, high}
+- `dueDate` no puede ser menor a la fecha actual
+- No se puede marcar como `done` si no estuvo antes en `in_progress`
+- No se puede eliminar una tarea en estado `in_progress`
+
+---
+
+# 5. Endpoints obligatorios
+
+## 5.1 Health Check
+
+```
+GET /health
+```
+
+- Público (sin API Key)
+
+---
+
+## 5.2 Listar tareas
+
+```
+GET /tasks
+```
+
+- Requiere API Key
+- Soporta filtros:
+
+```
+?status=pending
+?priority=high
+?assignedTo=10
+?limit=10
+```
+
+---
+
+## 5.3 Obtener tarea por ID
+
+```
+GET /tasks/{id}
+```
+
+Casos:
+
+- ID válido → 200  
+- No existe → 404  
+- Formato inválido → 400  
+
+---
+
+## 5.4 Crear tarea
+
+```
+POST /tasks
+```
+
+Validaciones:
+
+- Campos obligatorios
+- Tipos de datos correctos
+- Reglas de negocio
+
+---
+
+## 5.5 Actualizar tarea
+
+```
+PATCH /tasks/{id}
+```
+
+- Validar transición de estados
+- Validar reglas de negocio
+
+---
+
+## 5.6 Eliminar tarea
+
+```
+DELETE /tasks/{id}
+```
+
+- Restringido según estado
+
+---
+
+## 5.7 Endpoint adicional obligatorio
+
+Ejemplo:
+
+```
+POST /tasks/{id}/assign
+```
+
+```json
+{
+  "userId": 10
+}
+```
+
+---
+
+# 6. Seguridad: API Key
+
+## 6.1 Reglas
+
+Header obligatorio:
+
+```
+x-api-key: <API_KEY>
+```
+
+Respuestas:
+
+- Sin API Key → `401 Unauthorized`
+- API Key inválida → `403 Forbidden`
+- API Key válida → acceso permitido
+
+## 6.2 Requisitos técnicos
+
+- API Key en variables de entorno
+- Validación centralizada (middleware recomendado)
+
+---
+
+# 7. Documentación obligatoria con Swagger
+
+La API debe estar documentada usando OpenAPI 3.x.
+
+## 7.1 Requisitos mínimos
+
+La documentación Swagger debe incluir:
+
+- Información general de la API
+- Definición de endpoints
+- Parámetros
+- Request bodies
+- Response schemas
+- Códigos HTTP
+- Ejemplos
+- Seguridad API Key
+
+---
+
+## 7.2 Seguridad en Swagger
+
+```yaml
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+```
+
+---
+
+## 7.3 UI Swagger
+
+Debe exponerse en:
+
+```
+/swagger
+```
+
+---
+
+# 8. Requerimientos de testing
+
+## 8.1 Tipos de prueba
+
+- Funcionales
+- Negativos
+- Borde
+- Seguridad
+- Contrato
+- Automatización
+
+---
+
+## 8.2 Casos mínimos
+
+| Tipo | Cantidad |
+|------|--------:|
+| Positivos | 10 |
+| Negativos | 12 |
+| Borde | 6 |
+| Seguridad | 6 |
+| Automatizados | 10 |
+
+---
+
+## 8.3 Validación Swagger vs API
+
+- Consistencia de schemas
+- Códigos HTTP correctos
+- Endpoints alineados
+
+---
+
+# 9. Automatización
+
+Herramientas sugeridas:
+
+- Postman + Newman  
+- Pytest + requests  
+- Jest + Supertest  
+- REST Assured  
+
+---
+
+# 10. Requerimientos técnicos
+
+- API REST funcional
+- JSON
+- Validación de inputs
+- Manejo correcto de errores
+
+---
+
+# 11. Entregables
+
+1. Código fuente  
+2. Swagger/OpenAPI  
+3. Plan de pruebas  
+4. Casos de prueba  
+5. Automatización  
+6. Evidencia  
+7. Reporte de defectos  
+8. README  
+
+---
+
+# 12. Rúbrica
+
+| Criterio | Peso |
+|---------|------|
+| Diseño de API | 15% |
+| Implementación | 20% |
+| Swagger | 15% |
+| Testing | 25% |
+| Seguridad | 10% |
+| Automatización | 10% |
+| Documentación | 5% |
+
+---
+
+# 13. Extensiones opcionales
+
+- Roles
+- JWT
+- CI/CD
+- Docker
+
+---
+
+# 14. Resultado esperado
+
+El estudiante integra diseño, implementación, documentación y testing de APIs en un escenario realista.
