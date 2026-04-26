@@ -306,6 +306,7 @@ def test_create_task_success():
 
     assert response.status_code == 201
     assert "id" in response.json()
+```
 ---
 
 # 10. Requerimientos técnicos
@@ -317,19 +318,20 @@ def test_create_task_success():
 
 ---
 
-# 11. Entregables
+## 11. Entregables
 
-1. Código fuente  
-2. Swagger/OpenAPI  
-3. Plan de pruebas  
-4. Casos de prueba  
-5. Automatización  
-6. Evidencia  
-7. Reporte de defectos  
-8. README  
+Entregar únicamente el **enlace al repositorio en GitHub**, el cual debe contener:
 
----
+- Código fuente de la API: implementación completa de la API REST, incluyendo endpoints, validaciones, manejo de errores y seguridad con API Key.  
+- Swagger/OpenAPI: documentación accesible (por ejemplo en `/swagger` o `/docs`) con endpoints, parámetros, requests, responses, códigos HTTP y seguridad. 
+- Plan de pruebas: descripción de la estrategia de testing, alcance, tipos de pruebas, herramientas y criterios de aceptación.  
+- Casos de prueba: listado o matriz con identificador, objetivo, pasos, datos de entrada y resultados esperados.  
+- Automatización: suite de pruebas automatizadas ejecutable con un comando (ej: `pytest`, `npm test`, `newman`).  
+- Evidencia: resultados de ejecución de pruebas (logs, capturas, reportes o salidas de consola).  
+- README: instrucciones para instalar, configurar, ejecutar la API, acceder a Swagger y correr las pruebas.
 
-# 12. Resultado esperado
+### Resultado esperado
 
 El estudiante integra diseño, implementación, documentación y testing de APIs en un escenario realista.
+
+---
