@@ -247,14 +247,65 @@ Debe exponerse en:
 ---
 
 # 9. Automatización
+Los estudiantes deben implementar un conjunto automatizado de pruebas de API que valide el comportamiento funcional, de seguridad y de contrato de la API.
 
-Herramientas sugeridas 
+## 9.1 Detalles
+
+#### Qué automatizar
+- Health check (`/health`)
+- CRUD de tareas
+- Reglas de negocio (validaciones y transiciones)
+- Seguridad (API Key: 401, 403, acceso válido)
+- Contrato (consistencia con Swagger)
+
+#### Requisitos mínimos
+- ≥ 10 pruebas automatizadas  
+- ≥ 3 endpoints cubiertos  
+- Casos positivos y negativos  
+- Ejecución con un comando (`pytest`, `npm test`, `newman`, etc.)
+
+#### Buenas prácticas
+- Tests independientes  
+- Datos controlados  
+- Uso de variables (URL, API Key)  
+- Organización clara de archivos  
+
+#### Opcional
+- CI/CD  
+- Reportes  
+- Tests paralelos  
+
+#### Objetivo
+Asegurar calidad, detectar errores y validar la API de forma sistemática.
+
+## 9.2 Herramientas sugeridas 
 
 - Postman + Newman  
 - Pytest + requests  
 - Jest + Supertest  
 - REST Assured  
 
+#### 9.3 Ejemplo (Python + pytest)
+
+```python
+import requests
+
+BASE_URL = "http://localhost:3000"
+API_KEY = "test-key"
+
+def test_create_task_success():
+    response = requests.post(
+        f"{BASE_URL}/tasks",
+        headers={"x-api-key": API_KEY},
+        json={
+            "title": "Test task",
+            "status": "pending",
+            "priority": "medium"
+        }
+    )
+
+    assert response.status_code == 201
+    assert "id" in response.json()
 ---
 
 # 10. Requerimientos técnicos
