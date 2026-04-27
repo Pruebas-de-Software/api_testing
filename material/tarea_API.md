@@ -1,4 +1,4 @@
-# Tarea INF331: Diseño, Implementación y Testing de una API de Gestión de Tareas con API Key y Swagger
+# Tarea INF331: Diseño, Implementación y Testing de una API de Gestión de Tareas con API Key y documentación API
 
 ## 1. Contexto del problema
 
